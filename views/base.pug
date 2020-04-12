@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        if pageTitle
+            title #{pageTitle}
+        else
+            title MDI Reynosa.
+        
+        link(rel="stylesheet", href="css/main.css")
+    body
+        header
+            ul
+                li
+                    a Inicio
+                li
+                    a Contacto
+                li
+                    a Productos
+        
+        main
+            block content
+    footer
+        p El pie de la pagina.
