@@ -2,23 +2,24 @@
 html(lang="en")
     head
         meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
         if pageTitle
             title #{pageTitle}
         else
             title MDI Reynosa.
-        
-        link(rel="stylesheet", href="css/main.css")
+
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet"> 
+        link(rel="stylesheet" href="css/main.css")
+        block css
     body
         header
-            ul
-                li
-                    a Inicio
-                li
-                    a Contacto
-                li
-                    a Productos
-        
+            nav
+                ul
+                    li: a Inicio
+                    li: a Contacto
+                    li: a Productos
+                    li: img(src="img/logo.png", alt="")
+
         main
             block content
     footer

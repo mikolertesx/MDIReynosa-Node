@@ -1,4 +1,34 @@
 extends base.pug
 
+block css
+    link(rel="stylesheet", href="css/index.css")
+
 block content
-    p Version estatica de el primer sitio web.
+    section#historia
+        .body-section
+            h2 Historia
+
+            p Con larga experiencia y presencia en la región y con una trayectoria de 15 años, nos ocupamos en crear soluciones para nuestros clientes desde un componente hasta el diseño integral de un proyecto.
+
+            p Somos una empresa 100% mexicana; especializada en diseñar maquinaria con enfoque industrial, ademas de brindar servicio sd emantenimiento, automatización de procesos, diseño industrial y venta de componentes neumáticos, hidráulicos y electrónicos.
+
+    section#servicios
+        .body-section
+            h2 Servicios
+
+            h3 Cotizaciones
+            p Cotizaciones detalladas según sus necesidades en equipos mecánicos y de control.
+            .lists
+                .half.left
+                    h3 Diseño y fabricación.
+                    ul
+                        li Diseño mecánico en 3D.
+                        li Diseño de controles y paneles.
+                        li Ingenieros y técnicos capacitados para dar soporte en planta.
+                .half.right
+                    h3 Servicio y soporte.
+                    ul
+                        li Seguimiento de proyecto.
+                        li Software y automatización.
+                        li Integración.
+                .fix
