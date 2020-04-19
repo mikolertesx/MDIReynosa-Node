@@ -17,6 +17,7 @@
   "author": "Mikolertesx",
   "license": "ISC",
   "dependencies": {
+    "aos": "^2.3.4",
     "body-parser": "^1.19.0",
     "browserify-middleware": "^8.1.1",
     "express": "^4.17.1",
