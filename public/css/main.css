@@ -106,6 +106,6 @@ header nav ul li img {
     main,
     footer {
         width: 90vw;
-        margin-left: auto;
+        margin-left: 10vw;
     }
 }
