@@ -4,6 +4,9 @@ block css
     link(rel="stylesheet", href="css/index.css")
 
 block content
+    section#bienvenido
+        img(src="img/logo.png", alt="")
+
     section#historia
         .body-section
             h2 Historia
@@ -41,16 +44,19 @@ block content
 
     section#mision-vision
         .body-section
+            h2 Misión y visión.
             .shared
                 .half.left
-                    h2 Misión.
+                    h3 Misión.
 
                     p Brindar a nuestros clientes solcuones, productos y servicios de la mejor calidad, en tiempo y forma con personal capacitado.
 
                 .half.right
-                    h2 Visión.
+                    h3 Visión.
 
-                    h3 Lo que ofrecemos.
+                    p Ser una empresa que ofrezca calidad para mantener la confianza de nuestros clientes. 
+
+                    h4 Lo que ofrecemos.
 
                     ul
                         li Costos competitivos
@@ -86,31 +92,23 @@ block content
     section#productos
         .body-section
             h2 Venta de equipo industrial.
-
-            h3 YPC de México.
-
-            .shared
-                .half.left
-                    h3 Productos.
-                    ul
-                        li Equipos de tratamientos de aire.
-                        li Electroválvulas.
-                        li Válvulas Mecánicas.
-                        li Cilindros Neumáticos.
-                        li Conectores y mangueras.
-                        li Hidráulica.        
-                .half.right
-                    h3 Imagenes.
-                    .gallery
-                        .gallery-img
-                            img(src="img/secciones/productos/conectores.png", alt="Conectores")
-                        .gallery-img
-                            img(src="img/secciones/productos/Electroválvulas.png", alt="Electrovalvulas")
-                        .gallery-img
-                            img(src="img/secciones/productos/filtro.png", alt="Filtro")
-                        .gallery-img
-                            img(src="img/secciones/productos/Neumáticos.png", alt="Neumáticos")
-            .fix
+            h3 Productos.
+            ul
+                li Equipos de tratamientos de aire.
+                li Electroválvulas.
+                li Válvulas Mecánicas.
+                li Cilindros Neumáticos.
+                li Conectores y mangueras.
+                li Hidráulica.        
+        .gallery#productos
+            .gallery-img
+                img(src="img/secciones/productos/conectores.png", alt="Conectores")
+            .gallery-img
+                img(src="img/secciones/productos/Electroválvulas.png", alt="Electrovalvulas")
+            .gallery-img
+                img(src="img/secciones/productos/filtro.png", alt="Filtro")
+            .gallery-img
+                img(src="img/secciones/productos/Neumáticos.png", alt="Neumáticos")
 
     section#distribuidores
         .body-section
@@ -135,7 +133,7 @@ block content
             h3 Syscom
 
             p Venta de plumas para control del acceso vehicular.
-    section#beneficio-clientes(style="min-height:0; height:auto;")
+    section#beneficio-clientes
         .body-section
             h2 Clientes
 
@@ -147,7 +145,7 @@ block content
                 span.red MDI IND SA de CV 
                 | combina precio, calidad, servicio y la mejor atención al cliente.    
 
-        .gallery-wide
+        .gallery#productos-section
             .gallery-img
                 img(src="img/secciones/logos/ametek.png", alt="Ametek")
             .gallery-img
