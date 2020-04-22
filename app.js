@@ -2,13 +2,16 @@ const express = require('express');
 const browserify = require('browserify-middleware');
 const path = require('path');
 
+const paths = require('./controller/paths');
+
 const app = express();
 
 const shopRoutes = require('./routes/shop');
 
 app.set('view engine', 'pug');
 
-// Create a browser version of javascript files.
+app.use(paths);
+
 app.use('/js', browserify(path.join(__dirname, 'public', 'js')));
 
 app.use(express.static('public'))

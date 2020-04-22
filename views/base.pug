@@ -15,11 +15,11 @@ html(lang="en")
     body
         header
             nav
+                block nav
+                    - var curPath = '';
                 ul
-                    li: a.active(href='/'): i.fas.fa-home
-                    li: a(href='/'): i.fas.fa-address-book
-                    li: a(href='/'): i.fas.fa-dollar-sign
-                    //- li: img(src="img/logo.png", alt="")
+                    for path in paths
+                        li: a(href=path[0], class=(curPath === path[0]? "active": "")): i(class=path[1])
 
         main
             block content
