@@ -4,5 +4,39 @@ block nav
     - var curPath = '/contact';
 
 block css
+    link(rel="stylesheet", href="css/contact.css")
+    link(rel="stylesheet", href="css/forms.css")
 
 block content
+    .adaptable
+        h2 Contacto
+        .pantalla
+            .grupo
+                p
+                    span.bold Ingeniero
+                    |  Antonio Acevedo Cano
+                p
+                    span.bold Telefono
+                    |  (8992)-021-609
+                p
+                    span.bold Email
+                    |  jacevedo62 @ hotmail .com
+            .grupo.logo
+                p Mantenimiento
+                p Diseño
+                p Industrial
+
+        form(action="/", method="POST")
+            .form-header
+                h2.form-title Enviar correo
+            .control
+                label(for="name") Nombre
+                input(type="text", name="name")
+            .control
+                label(for="name") Correo
+                input(type="mail", name="mail")
+            .control
+                label(for="message") Mensaje
+                textarea(name="message")
+
+            button(type="submit") Enviar

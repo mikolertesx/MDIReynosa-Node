@@ -1,0 +1,71 @@
+form {
+  /* display: block; */
+  display: block;
+  width: 95%;
+  max-width: 800px;
+  /* min-height: 592px; */
+  margin: auto;
+  margin-bottom: 120px;
+  border: 3px solid rgba(72, 190, 255, 0.15);
+  border-radius: 12px;
+}
+
+form .form-header {
+  width: 100%;
+  background: #236386;
+  margin-top: 0em;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+form .form-title {
+  margin-top: 0px;
+  padding: 32px;
+  color: white;
+}
+
+form label {
+  display: block;
+}
+
+form input[type=text],
+form input[type=mail],
+form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #236386;
+  border-radius: 5px;
+  transition: all .3s;
+}
+
+
+form input[type=text]:focus,
+form input[type=mail]:focus,
+form textarea:focus {
+  border-color: #48beff;
+  font-size: 1.25rem;
+}
+
+form button[type=submit] {
+  display: block;
+  border: 1px solid #236386;
+  color: white;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background: #236386;
+  padding: 24px;
+  margin-top: 52px;
+  width: 100%;
+  font-size: 1.25rem;
+}
+
+form button[type=submit]:hover {
+  background-color: #48beff;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.control {
+  margin: 15px 20px;
+}
