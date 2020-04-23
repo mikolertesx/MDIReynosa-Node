@@ -1,5 +1,6 @@
 const express = require('express');
 const browserify = require('browserify-middleware');
+const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
 
@@ -28,23 +29,30 @@ app.use(session({
   store: store
 }));
 
-// Middleware that saves the paths in the main directory.
-app.use(paths);
-
 // Convert to JS-Browser
 app.use('/js', browserify(path.join(__dirname, 'public', 'js')));
 
 // Create a static folder for using in the views.
 app.use(express.static('public'))
 
+// Get the x-www-form-urlencoded info.
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Middleware that saves the paths in the main directory.
+app.use(paths);
+
+
 // Create the basic routes.
 app.use(authRoutes);
 app.use(shopRoutes);
 
 // Start the server.
+const UserSchema = require('./model/User');
+
 mongoose.connect(secrets.mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-}).then(() => {
+})
+.then(() => {
   app.listen(3000);
 })

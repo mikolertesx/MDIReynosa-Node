@@ -1,10 +1,5 @@
 module.exports.getIndex = (req, res, next) => {
-  if (req.session.name) {
-    console.log(req.session.name);
-  } else {
-    console.log('Usuario creado.');
-    req.session.name = 'Something great!';
-  }
+  console.log(req.session.user || 'No registrado');
   res.render('shop/index');
 }
 
