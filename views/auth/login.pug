@@ -1,0 +1,20 @@
+extends ../base.pug
+
+block nav
+  - var curPath = ''
+
+block css
+  link(rel="stylesheet", href="css/auth/login.css")
+  link(rel="stylesheet", href="css/util/forms.css")
+
+block content
+    form(action="/" method="POST")
+      .form-header
+        h2.form-title Acceder
+      .control
+        label(for="username") Nombre de usuario
+        input(type="text", name="username")
+      .control
+        label(for="password") Contraseña
+        input(type="password", name="password")
+      button(type="submit") Enviar

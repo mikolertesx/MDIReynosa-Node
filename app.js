@@ -7,6 +7,7 @@ const paths = require('./controller/paths');
 const secrets = require('./util/secrets');
 
 const shopRoutes = require('./routes/shop');
+const authRoutes = require('./routes/auth');
 
 const session = require('express-session');
 
@@ -28,6 +29,7 @@ app.use('/js', browserify(path.join(__dirname, 'public', 'js')));
 app.use(express.static('public'))
 
 // Create the basic routes.
+app.use(authRoutes);
 app.use(shopRoutes);
 
 // Start the server.
