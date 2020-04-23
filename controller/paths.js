@@ -4,9 +4,9 @@ const Router = exp_router();
 
 Router.use((req, res, next) => {
   res.locals.paths = [
-    ['/', 'fas fa-home'],
-    ['/contact', 'fas fa-address-book'],
-    ['/products', 'fas fa-dollar-sign']
+    ['/', 'fas fa-home', 'Inicio'],
+    ['/contact', 'fas fa-address-book', 'Contactos'],
+    ['/products', 'fas fa-dollar-sign', 'Productos']
   ];
 
   console.log(res.locals);

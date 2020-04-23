@@ -13,7 +13,7 @@ module.exports.getProducts = (req, res, next) => {
       {
         id: 1,
         name: 'Un producto',
-        image: 'https://i.pinimg.com/originals/59/83/f5/5983f54e3917e773dbd2a6c414ada035.jpg',
+        image: 'https://homedepot.cdnonline.com.mx/00A5606/media2/productos/139825/139825-d.jpg',
         description: 'Ya sabes lo que diré...',
         price: 14.55
       },
