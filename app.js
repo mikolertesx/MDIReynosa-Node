@@ -10,16 +10,25 @@ const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');
 
 const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+const mongoose = require('mongoose');
 
 app.set('view engine', 'pug');
+
+const store = new MongoDBStore({
+  uri: secrets.mongoURI,
+  collection: 'sessions'
+});
 
 app.use(session({
   secret: secrets.secret,
   secure: false,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: store
 }));
 
+// Middleware that saves the paths in the main directory.
 app.use(paths);
 
 // Convert to JS-Browser
@@ -33,4 +42,9 @@ app.use(authRoutes);
 app.use(shopRoutes);
 
 // Start the server.
-app.listen(3000);
+mongoose.connect(secrets.mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+  app.listen(3000);
+})
