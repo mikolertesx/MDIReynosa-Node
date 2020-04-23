@@ -21,6 +21,7 @@ const store = new MongoDBStore({
   collection: 'sessions'
 });
 
+// TODO Agregar expiración a las sesiones.
 app.use(session({
   secret: secrets.secret,
   secure: false,
@@ -41,10 +42,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Middleware that saves the paths in the main directory.
 app.use(paths);
 
-
 // Create the basic routes.
 app.use(authRoutes);
 app.use(shopRoutes);
+
+// TODO Add a default route for 404 page, and 505 page.
 
 // Start the server.
 const UserSchema = require('./model/User');

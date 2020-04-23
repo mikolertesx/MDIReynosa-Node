@@ -10,6 +10,7 @@ Router.use('/', (req, res, next) => {
     ['/products', 'fas fa-dollar-sign', 'Productos']
   ];
   if (req.session.user) {
+    // TODO Find a more performant way to do this.
     console.log('Usuario logeado', req.session.user);
     User.findById(req.session.user).then(user => {
       req.user = user;

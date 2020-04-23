@@ -6,10 +6,13 @@ module.exports.getIndex = (req, res, next) => {
 module.exports.getContact = (req, res, next) => {
   res.render('shop/contact');
 }
+// TODO Add a postContact.
+// TODO Add a nodemailer implementation.
 
 module.exports.getProducts = (req, res, next) => {
   res.render('shop/products',
   {
+    // TODO Fetch from the database.
     products: [
       {
         id: 1,
