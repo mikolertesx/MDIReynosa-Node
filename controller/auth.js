@@ -9,7 +9,17 @@ module.exports.getRegister = (req, res, next) => {
 module.exports.postRegister = (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password.trim();
-  const user = User.findOne({ name: username })
+  let isAdmin = false;
+
+  User
+    .count()
+    .then(qty => {
+      isAdmin = qty === 0 ? true : false;
+      return;
+    })
+    .then(() =>{
+      return User.findOne({ name: username }) 
+    }) 
     .then(doc => {
       if (doc) {
         throw new Error('This shouldnt happen');
@@ -21,7 +31,8 @@ module.exports.postRegister = (req, res, next) => {
             return User.create({
               name: username,
               password: hashedPassword,
-              products: []
+              products: [],
+              role: isAdmin ? "Administrador": "Empleado"
             });
           });
       }
