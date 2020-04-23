@@ -47,7 +47,7 @@ section .body-section ul ul li::marker {
 }
 
 section#bienvenido {
-    background: url('../img/industria.jpg');
+    background: url('../../img/industria.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
