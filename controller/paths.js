@@ -8,8 +8,7 @@ Router.use((req, res, next) => {
     ['/contact', 'fas fa-address-book', 'Contactos'],
     ['/products', 'fas fa-dollar-sign', 'Productos']
   ];
-
-  console.log(res.locals);
+  
   // Check if it's an admin and then add the admin section.
   next();
 })
