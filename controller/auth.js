@@ -28,7 +28,6 @@ module.exports.postRegister = (req, res, next) => {
         return bcrypt
           .hash(password, 12)
           .then(hashedPassword => {
-            console.log(password, hashedPassword);
             return User.create({
               name: username,
               password: hashedPassword,

@@ -1,5 +1,4 @@
 module.exports.getIndex = (req, res, next) => {
-  console.log(req.session.user || 'No registrado');
   res.render('shop/index');
 }
 

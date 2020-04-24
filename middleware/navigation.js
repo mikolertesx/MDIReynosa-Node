@@ -2,10 +2,6 @@
 const exp_router = require('express').Router;
 const User = require('../model/User');
 const Router = exp_router();
-const csrf = require('csurf');
-const csrfProtection = csrf();
-
-Router.use(csrfProtection);
 
 Router.use('/', (req, res, next) => {
   res.locals.paths = [
@@ -15,10 +11,8 @@ Router.use('/', (req, res, next) => {
   ];
   if (req.session.user) {
     // TODO Find a more performant way to do this.
-    console.log('Usuario logeado', req.session.user);
     User.findById(req.session.user).then(user => {
       req.user = user;
-      console.log(req.user);
       if (req.user) {
         res.locals.paths.push([
           '/admin', 'fas fa-cog', 'Opciones'
@@ -29,8 +23,6 @@ Router.use('/', (req, res, next) => {
       return next();
     })
   } else {
-    // Check if it's an admin and then add the admin section.
-    if (req.user) { console.log('Continuando como anonimo.'); }
     next();
   }
 })

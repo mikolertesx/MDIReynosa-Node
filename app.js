@@ -4,7 +4,10 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
 
-const paths = require('./controller/paths');
+const navigation = require('./middleware/navigation');
+const csrfProtection = require('./middleware/csrf');
+const debug = require('./middleware/debug');
+
 const secrets = require('./util/secrets');
 
 const shopRoutes = require('./routes/shop');
@@ -44,8 +47,14 @@ app.use(express.static('public'))
 // Get the x-www-form-urlencoded info.
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Middleware that saves the paths in the main directory.
-app.use(paths);
+// Creates a CSRF req object.
+app.use(csrfProtection);
+
+// Middleware that saves the paths in the app locals.
+app.use(navigation);
+
+// Give useful debug information.
+app.use(debug);
 
 // Create the basic routes.
 app.use(authRoutes);
