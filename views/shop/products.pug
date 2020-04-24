@@ -8,15 +8,18 @@ block css
 
 block content
     h2 Productos
-    .products
-        for product in products
-            .product
-                .product-header
-                    h3.product-name #{product.name}
-                    p.product-price
-                        |#{product.price}
-                        span.dollar $
-                img.product-image(src=product.image, alt="")
-                .product-info
-                    p.product-description #{product.description}            
-                    a.product-buy(href=`/product/${product.id}`) Comprar
+    if products.length > 0
+        .products
+            for product in products
+                .product
+                    .product-header
+                        h3.product-name #{product.name}
+                        p.product-price
+                            |#{product.price}
+                            span.dollar $
+                    img.product-image(src=product.image, alt="")
+                    .product-info
+                        p.product-description #{product.description}            
+                        a.product-buy(href=`/product/${product.id}`) Comprar
+    else
+        h2 No hay productos agregados de momento.
