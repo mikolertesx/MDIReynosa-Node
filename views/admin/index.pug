@@ -4,6 +4,14 @@ block nav
   - var curPath = '/admin'
 
 block css
+  link(rel="stylesheet", href="css/admin/index.css")
 
 block content
-  p There will be something great here!
+  .opciones
+    .opcion
+      i.icono.fas.fa-users
+      a(href="/").opcion-nombre Empleados
+    
+    .opcion
+      i.icono.fas.fa-hand-holding-usd
+      a(href="/").opcion-nombre Productos
