@@ -80,3 +80,8 @@ module.exports.postLogin = (req, res, next) => {
     })
 
 }
+
+module.exports.getLogout = (req, res, next) => {
+  req.session.destroy();
+  res.redirect('/');
+}

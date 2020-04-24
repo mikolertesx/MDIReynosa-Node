@@ -9,6 +9,7 @@ const secrets = require('./util/secrets');
 
 const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');
+const adminRoutes = require('./routes/admin');
 
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
@@ -45,6 +46,7 @@ app.use(paths);
 // Create the basic routes.
 app.use(authRoutes);
 app.use(shopRoutes);
+app.use('/admin', adminRoutes);
 
 // TODO Add a default route for 404 page, and 505 page.
 

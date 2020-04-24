@@ -14,15 +14,19 @@ Router.use('/', (req, res, next) => {
     console.log('Usuario logeado', req.session.user);
     User.findById(req.session.user).then(user => {
       req.user = user;
-      res.locals.paths.push([
-        '/admin', 'fas fa-cog', 'Opciones'
-      ])
-
+      console.log(req.user);
+      if (req.user) {
+        res.locals.paths.push([
+          '/admin', 'fas fa-cog', 'Opciones'
+        ], [
+            '/logout', 'fas fa-sign-out-alt', 'Salir'
+        ])
+      }
       return next();
     })
   } else {
     // Check if it's an admin and then add the admin section.
-    if (req.user) {console.log('Continuando como anonimo.');}
+    if (req.user) { console.log('Continuando como anonimo.'); }
     next();
   }
 })
