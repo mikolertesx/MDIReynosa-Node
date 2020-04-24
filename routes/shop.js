@@ -5,6 +5,6 @@ const shopController = require('../controller/shop');
 router.get('/', shopController.getIndex);
 router.get('/contact', shopController.getContact);
 router.get('/products', shopController.getProducts);
-// TODO Add post requests.
+// TODO Add put, place and delete requests.
 
 module.exports = router;

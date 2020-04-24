@@ -15,6 +15,7 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const mongoose = require('mongoose');
 
+
 app.set('view engine', 'pug');
 
 const store = new MongoDBStore({
@@ -57,17 +58,29 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
   console.log('Pagina 500', err);
-  res.render('error/500');
+  let message = "";
+
+  switch (err.code) {
+    case "EBADCSRFTOKEN":
+      message = "Token de seguridad no valido.\nPor favor regresa a la página principal";
+      break;
+    default:
+      message = "Ocurrio un error desconocido.";
+      break;
+  }
+
+  const errorCode = err.code;
+  res.render('error/500', {
+    message: message
+  });
 })
 
 // Start the server.
-const UserSchema = require('./model/User');
-
 mongoose.connect(secrets.mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
-.then(() => {
-  console.log('Server succesfully loaded database, web-page will start now.');
-  app.listen(3000);
-})
+  .then(() => {
+    console.log('Server succesfully loaded database, web-page will start now.');
+    app.listen(3000);
+  })

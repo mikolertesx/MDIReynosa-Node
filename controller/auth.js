@@ -1,9 +1,10 @@
 const User = require('../model/User');
 const bcrypt = require('bcrypt');
 
-// TODO Add CSRF protection.
 module.exports.getRegister = (req, res, next) => {
-  res.render('auth/register');
+  res.render('auth/register', {
+    csrfToken: req.csrfToken()
+  });
 }
 
 module.exports.postRegister = (req, res, next) => {
@@ -45,7 +46,9 @@ module.exports.postRegister = (req, res, next) => {
     });
 }
 module.exports.getLogin = (req, res, next) => {
-  res.render('auth/login');
+  res.render('auth/login', {
+    csrfToken: req.csrfToken()
+  });
 }
 
 module.exports.postLogin = (req, res, next) => {

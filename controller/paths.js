@@ -2,6 +2,10 @@
 const exp_router = require('express').Router;
 const User = require('../model/User');
 const Router = exp_router();
+const csrf = require('csurf');
+const csrfProtection = csrf();
+
+Router.use(csrfProtection);
 
 Router.use('/', (req, res, next) => {
   res.locals.paths = [

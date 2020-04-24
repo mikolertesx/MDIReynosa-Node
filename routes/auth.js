@@ -3,6 +3,7 @@ const controllers = require('../controller/auth');
 const auth = require('../middleware/auth');
 const Router = router();
 
+
 // #region Registrar.
 Router.get('/register', auth.isNotAuth, controllers.getRegister);
 // TODO Add validation to the post register.

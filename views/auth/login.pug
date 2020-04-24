@@ -9,6 +9,7 @@ block css
 
 block content
     form(action="/login" method="POST")
+      input(type="hidden", name="_csrf" value=csrfToken)
       .form-header
         h2.form-title Acceder
       .control
