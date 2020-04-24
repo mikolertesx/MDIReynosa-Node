@@ -22,13 +22,16 @@ const store = new MongoDBStore({
   collection: 'sessions'
 });
 
-// TODO Agregar expiración a las sesiones.
 app.use(session({
   secret: secrets.secret,
   secure: false,
   resave: false,
   saveUninitialized: false,
-  store: store
+  store: store,
+  cookie: {
+    // 1 Week time to re-enter.
+    expires: 1000 * 60 * 24 * 7
+  }
 }));
 
 // Convert to JS-Browser
@@ -48,7 +51,14 @@ app.use(authRoutes);
 app.use(shopRoutes);
 app.use('/admin', adminRoutes);
 
-// TODO Add a default route for 404 page, and 505 page.
+app.use((req, res, next) => {
+  res.render('error/404');
+})
+
+app.use((err, req, res, next) => {
+  console.log('Pagina 500', err);
+  res.render('error/500');
+})
 
 // Start the server.
 const UserSchema = require('./model/User');
@@ -58,5 +68,6 @@ mongoose.connect(secrets.mongoURI, {
   useUnifiedTopology: true
 })
 .then(() => {
+  console.log('Server succesfully loaded database, web-page will start now.');
   app.listen(3000);
 })
