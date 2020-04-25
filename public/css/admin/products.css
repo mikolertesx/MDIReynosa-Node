@@ -75,8 +75,9 @@ h2 {
   height: 64px;
 }
 
-.product-actions a {
+.product-actions button {
   flex-grow: 1;
+  border: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -86,7 +87,7 @@ h2 {
   transition: all 0.3s;
 }
 
-.product-actions a:hover {
+.product-actions button:hover {
   background: white;
   transform: scale(1.3);
 }
