@@ -13,10 +13,9 @@ let attributes = {};
 let holders = {};
 
 const confirmHandle = (sender) => {
-  if (!sendable) {return;}
+  if (!sendable) { return; }
   const superParent = sender.target.closest('.product');
   const container = superParent.parentElement;
-  const clone = document.importNode(templateFinished.content, true);
 
   attributes = {
     name: holders.name.value,
@@ -26,8 +25,17 @@ const confirmHandle = (sender) => {
     id: holders.id.value
   };
 
-  const newAttributes = { ... attributes };
-  
+  console.log(attributes.price);
+  if (attributes.price === '') {
+    alert('Por favor cambie el precio.');
+    holders.price.value = 0;
+    return;
+  }
+
+
+  const clone = document.importNode(templateFinished.content, true);
+  const newAttributes = { ...attributes };
+
   if (!imageChanged) {
     newAttributes['image'] = null;
   }
