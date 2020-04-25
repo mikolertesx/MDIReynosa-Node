@@ -1,0 +1,24 @@
+extends ../base.pug
+
+block nav
+    - var curPath = '/admin';
+
+block css
+    link(rel="stylesheet", href="/css/admin/products.css")
+
+block content
+    h2 Productos
+    .products
+        for product in products
+            .product
+                .product-header
+                    h3.product-name #{product.name}
+                    p.product-price
+                        |#{product.price}
+                        span.dollar $
+                img.product-image(src=product.image, alt="")
+                .product-info
+                    p.product-description #{product.description}
+                    .product-actions            
+                        a.product-edit Editar
+                        a.product-delete Eliminar

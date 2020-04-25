@@ -14,7 +14,6 @@ module.exports.getProducts = (req, res, next) => {
   Product
     .find()
     .then(products => {
-      console.log(products);
       return res.render('shop/products',
         {
           products: products
