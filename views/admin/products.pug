@@ -5,7 +5,7 @@ block nav
 
 block css
     link(rel="stylesheet", href="/css/admin/products.css")
-    link(rel="stylesheet", href="/css/util/forms.css")
+    //- link(rel="stylesheet", href="/css/util/forms.css")
 
 block js
     script(src="/js/admin/products.js")
@@ -13,20 +13,21 @@ block js
 block content
     input(type="hidden", name="_csrf" value=csrfToken)
     template(id="product-edit")
-        .product-edition
-            form(method="POST")
-                input(type="hidden", name="id")
+        .product
+            //- form(method="POST")
+            input(type="hidden", name="id")
+            .product-header.rows
                 .control
                     label(for="name") Nombre
                     input(type="text" name="name")
                 .control
                     label(for="price") Precio
-                    input(type="text" name="price")
-                .control
-                    //- Fill by code.
-                    img(src="...", alt="..." name="img")
-                    input(type="file" name="img-picker")
-                    
+                    input(type="number" name="price" step="0.01")
+            .control
+                //- Fill by code.
+                img.product-image(src="...", alt="..." name="img")
+                input(type="file" name="img-picker")
+            .product-info    
                 .control
                     label(for="description") Descripcion
                     textarea(name="description")
@@ -39,6 +40,7 @@ block content
             .product-header
                 h3.product-name NAME
                 p.product-price OK
+                p.dollar $
             img.product-image(src="...", alt="")
             .product-info
                 input.product-id(type="hidden" value="Nothing")
@@ -53,9 +55,8 @@ block content
             .product
                 .product-header
                     h3.product-name #{product.name}
-                    p.product-price
-                        |#{product.price}
-                        span.dollar $
+                    p.product-price #{product.price}
+                    p.dollar $
                 img.product-image(src=product.image, alt="")
                 .product-info
                     input.product-id(type="hidden" value=product._id)

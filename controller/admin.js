@@ -19,7 +19,7 @@ module.exports.getProducts = (req, res, next) => {
 module.exports.updateProducts = (req, res, next) => {
   const id = req.body.id;
   const name = req.body.name;
-  const price = 0;
+  const price = req.body.price;
   const image = req.body.image;
   const description = req.body.description;
   console.log('image', image);

@@ -22,6 +22,7 @@ h2 {
 }
 
 .product .product-header{
+  width: 100%;
   background-color: #236386;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
@@ -42,7 +43,7 @@ h2 {
   font-size: 1.8rem;
 }
 
-.product .product-price .dollar {
+.product .dollar {
   margin-left: 10px;
   color: green;
   font-size: 2rem;
@@ -126,6 +127,44 @@ h2 {
 
 .product-actions .product-cancel:hover {
   color: gray;
+  border: 1px solid gray;
+}
+
+.rows {
+  flex-direction: column !important;
+}
+
+.product form {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.control {
+  width: 100%;
+  margin: 12px;
+}
+
+.control input, label, textarea {
+  display: block;
+  resize: none;
+  width: 90%;
+}
+
+.control img {
+  display: block;
+  width: 80%;
+  margin: auto;
+}
+
+.control input[type="file"] {
+  width: 80%;
+  margin: auto;
+}
+
+.control input {
+  padding: 8px;
+  border-radius: 12px;
   border: 1px solid gray;
 }
 

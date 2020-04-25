@@ -14,7 +14,7 @@ let holders = {};
 
 const confirmHandle = (sender) => {
   if (!sendable) {return;}
-  const superParent = sender.target.closest('.product-edition');
+  const superParent = sender.target.closest('.product');
   const container = superParent.parentElement;
   const clone = document.importNode(templateFinished.content, true);
 
@@ -54,7 +54,7 @@ const cancelHandle = (sender) => {
   }
 
   imageChanged = false;
-  const superParent = sender.target.closest('.product-edition');
+  const superParent = sender.target.closest('.product');
   const container = superParent.parentElement;
   const clone = document.importNode(templateFinished.content, true);
 
@@ -177,7 +177,7 @@ const ReplaceElement = (element, object) => {
         sendable = true;
       });
   });
-  form.addEventListener('submit', formPrevent);
+  // form.addEventListener('submit', formPrevent);
   confirmButton.addEventListener('click', confirmHandle);
   cancelButton.addEventListener('click', cancelHandle);
   parentElement.replaceChild(clone, element);
