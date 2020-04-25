@@ -1,12 +1,18 @@
+const requests = require('./requests');
+const csrfToken = document.querySelector('input[name="_csrf"]').value;
+
 const editButtons = document.querySelectorAll('.product-edit');
 const deleteButtons = document.querySelectorAll('.product-delete');
 const templateEdit = document.querySelector('#product-edit');
 const templateFinished = document.querySelector('#product-finished');
+
 let editable = true;
+let sendable = true;
 let attributes = {};
 let holders = {};
 
 const confirmHandle = (sender) => {
+  if (!sendable) {return;}
   const superParent = sender.target.closest('.product-edition');
   const container = superParent.parentElement;
   const clone = document.importNode(templateFinished.content, true);
@@ -29,17 +35,18 @@ const confirmHandle = (sender) => {
 }
 
 const cancelHandle = (sender) => {
+  if (!sendable) { return; }
   const superParent = sender.target.closest('.product-edition');
   const container = superParent.parentElement;
   const clone = document.importNode(templateFinished.content, true);
-  
+
   productFill(clone, attributes);
   container.replaceChild(clone, superParent);
   editable = true;
 }
 
 const editHandle = (handler) => {
-  if (!editable) {
+  if (!editable || !sendable) {
     alert('Confirma los cambios antes de continuar al siguiente.');
     return;
   }
@@ -52,7 +59,7 @@ const editHandle = (handler) => {
 }
 
 const deleteHandle = (sender) => {
-  if (!editable){
+  if (!editable) {
     alert('Confirma los cambios antes de continuar.');
     return;
   }
@@ -76,7 +83,7 @@ const productFill = (element, data) => {
   const editButton = element.querySelector('.product-edit');
   const deletebutton = element.querySelector('.product-delete');
 
-  editButton.addEventListener('click', editHandle);  
+  editButton.addEventListener('click', editHandle);
   deletebutton.addEventListener('click', deleteHandle);
 
   name.innerText = attributes['name'];
@@ -87,7 +94,7 @@ const productFill = (element, data) => {
 }
 
 const getAttributes = (element) => {
-  
+
   const nameElement = element.querySelector('h3').innerText;
   const priceElement = element.querySelector('.product-price').innerText;
   const imageElement = element.querySelector('.product-image').src;
@@ -116,6 +123,7 @@ const ReplaceElement = (element, object) => {
   const price = clone.querySelector('input[name="price"]');
   const description = clone.querySelector('textarea[name="description"]');
   const image = clone.querySelector('img[name="img"]');
+  const imagePicker = clone.querySelector('input[name="img-picker"]');
   const form = clone.querySelector('form');
   const confirmButton = clone.querySelector('.product-accept');
   const cancelButton = clone.querySelector('.product-cancel');
@@ -135,8 +143,22 @@ const ReplaceElement = (element, object) => {
   name.value = object['name'];
   price.value = object['price'];
   image.src = object['image'];
+  console.log(image.src);
   description.value = object['description']
 
+
+  imagePicker.addEventListener('change', (event) => {
+    console.log(event);
+    sendable = false;
+
+    requests
+      .SendImage(event.target, csrfToken)
+      .then((result) => {
+        image.src = result.path;
+        console.log(result.path);
+        sendable = true;
+      });
+  });
   form.addEventListener('submit', formPrevent);
   confirmButton.addEventListener('click', confirmHandle);
   cancelButton.addEventListener('click', cancelHandle);

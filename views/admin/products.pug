@@ -11,6 +11,7 @@ block js
     script(src="/js/admin/products.js")
 
 block content
+    input(type="hidden", name="_csrf" value=csrfToken)
     template(id="product-edit")
         .product-edition
             form(method="POST")
@@ -24,6 +25,7 @@ block content
                 .control
                     //- Fill by code.
                     img(src="...", alt="..." name="img")
+                    input(type="file" name="img-picker")
                     
                 .control
                     label(for="description") Descripcion

@@ -1,6 +1,7 @@
 const express = require('express');
 const browserify = require('browserify-middleware');
 const bodyParser = require('body-parser');
+const multer = require('multer');
 const path = require('path');
 const app = express();
 
@@ -18,6 +19,23 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const mongoose = require('mongoose');
 
+
+const fileStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './public/img/static');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now().toString() + '-' + file.originalname);
+  }
+})
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg') {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+}
 
 app.set('view engine', 'pug');
 
@@ -46,6 +64,12 @@ app.use(express.static('public'))
 
 // Get the x-www-form-urlencoded info.
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Get the multipart-form encoded info.
+app.use(multer({
+  storage: fileStorage,
+  fileFilter: fileFilter
+}).single('image'))
 
 // Creates a CSRF req object.
 app.use(csrfProtection);
