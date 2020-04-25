@@ -49,6 +49,10 @@ const confirmHandle = (sender) => {
 
 const cancelHandle = (sender) => {
   if (!sendable) { return; }
+  if (imageChanged) {
+    requests.DeleteImage(holders.image.getAttribute('src'), csrfToken);
+  }
+
   imageChanged = false;
   const superParent = sender.target.closest('.product-edition');
   const container = superParent.parentElement;

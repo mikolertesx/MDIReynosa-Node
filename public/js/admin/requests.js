@@ -18,6 +18,19 @@ module.exports.SendImage = (FilePicker, csrfToken) => {
   });
 }
 
+module.exports.DeleteImage = (imagePath, csrfToken) => {
+  const endpoint = `/admin/deletepicture`;
+  fetch(endpoint, {
+    headers: {
+      'CSRF-Token': csrfToken,
+      'Content-Type': 'application/json'
+    },
+    method: 'DELETE',
+    body: JSON.stringify({path: imagePath})
+  });
+  console.log(endpoint);
+}
+
 module.exports.PatchProduct = (id, attributes, csrfToken) => {
   const endPoint = `/admin/updateproduct/${id}`;
   console.log('Patching product with', attributes);

@@ -48,3 +48,9 @@ module.exports.sendPicture = (req, res, next) => {
     path: imageUrl
   });
 }
+
+module.exports.deletePicture = (req, res, next) => {
+  const image = req.body.path;
+  fileDelete(image);
+  console.log(image);
+}

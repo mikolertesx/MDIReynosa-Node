@@ -17,11 +17,11 @@ function replaceAll(str, find, replace) {
 Router.get('/', auth.isAuth, controllers.getIndex);
 Router.get('/products', auth.isAuth, controllers.getProducts);
 
+// Update products.
 Router.patch('/updateproduct/:id', controllers.updateProducts);
 
 // PICTURES.
 Router.post('/sendpicture', auth.isAuth, controllers.sendPicture);
-Router.delete('/deletepicture', auth.isAuth);
-
+Router.delete('/deletepicture', auth.isAuth, controllers.deletePicture);
 
 module.exports = Router;
