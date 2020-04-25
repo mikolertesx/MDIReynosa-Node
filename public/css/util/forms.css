@@ -1,4 +1,5 @@
-form {
+form,
+.form {
   /* display: block; */
   display: block;
   width: 95%;
@@ -22,6 +23,10 @@ form .form-title {
   margin-top: 0px;
   padding: 32px;
   color: white;
+}
+
+form img {
+  width: 100%;
 }
 
 form label {

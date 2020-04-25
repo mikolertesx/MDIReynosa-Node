@@ -5,8 +5,46 @@ block nav
 
 block css
     link(rel="stylesheet", href="/css/admin/products.css")
+    link(rel="stylesheet", href="/css/util/forms.css")
+
+block js
+    script(src="/js/admin/products.js")
 
 block content
+    template(id="product-edit")
+        .product-edition
+            form(method="POST")
+                input(type="hidden", name="id")
+                .control
+                    label(for="name") Nombre
+                    input(type="text" name="name")
+                .control
+                    label(for="price") Precio
+                    input(type="text" name="price")
+                .control
+                    //- Fill by code.
+                    img(src="...", alt="..." name="img")
+                    
+                .control
+                    label(for="description") Descripcion
+                    textarea(name="description")
+                .product-actions
+                    button.product-accept Confirmar
+                    button.product-cancel Cancelar
+
+    template(id="product-finished")
+        .product
+            .product-header
+                h3.product-name NAME
+                p.product-price OK
+            img.product-image(src="...", alt="")
+            .product-info
+                input.product-id(type="hidden" value="Nothing")
+                p.product-description DESCRIPTION
+            .product-actions
+                button.product-edit Editar
+                button.product-delete Eliminar
+
     h2 Productos
     .products
         for product in products
@@ -18,7 +56,8 @@ block content
                         span.dollar $
                 img.product-image(src=product.image, alt="")
                 .product-info
+                    input.product-id(type="hidden" value="#{product._id}")
                     p.product-description #{product.description}
-                    .product-actions            
+                    .product-actions
                         button.product-edit Editar
                         button.product-delete Eliminar
