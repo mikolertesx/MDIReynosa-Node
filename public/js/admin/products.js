@@ -8,6 +8,7 @@ const templateFinished = document.querySelector('#product-finished');
 
 let editable = true;
 let sendable = true;
+let imageChanged = false;
 let attributes = {};
 let holders = {};
 
@@ -20,10 +21,19 @@ const confirmHandle = (sender) => {
   attributes = {
     name: holders.name.value,
     price: holders.price.value,
-    image: holders.image.src,
+    image: holders.image.getAttribute("src"),
     description: holders.description.value,
     id: holders.id.value
   };
+
+  const newAttributes = { ... attributes };
+  
+  if (!imageChanged) {
+    newAttributes['image'] = null;
+  }
+
+  imageChanged = false;
+
   console.log('attributes', attributes);
   console.log('container', container);
   console.log('clone', clone);
@@ -31,11 +41,15 @@ const confirmHandle = (sender) => {
 
   productFill(clone, attributes);
   container.replaceChild(clone, superParent);
+
+  requests.PatchProduct(newAttributes['id'], newAttributes, csrfToken);
+
   editable = true;
 }
 
 const cancelHandle = (sender) => {
   if (!sendable) { return; }
+  imageChanged = false;
   const superParent = sender.target.closest('.product-edition');
   const container = superParent.parentElement;
   const clone = document.importNode(templateFinished.content, true);
@@ -143,13 +157,13 @@ const ReplaceElement = (element, object) => {
   name.value = object['name'];
   price.value = object['price'];
   image.src = object['image'];
-  console.log(image.src);
   description.value = object['description']
 
 
   imagePicker.addEventListener('change', (event) => {
     console.log(event);
     sendable = false;
+    imageChanged = true;
 
     requests
       .SendImage(event.target, csrfToken)

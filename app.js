@@ -64,6 +64,7 @@ app.use(express.static('public'))
 
 // Get the x-www-form-urlencoded info.
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({}));
 
 // Get the multipart-form encoded info.
 app.use(multer({

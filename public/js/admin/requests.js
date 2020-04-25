@@ -17,3 +17,16 @@ module.exports.SendImage = (FilePicker, csrfToken) => {
     return json;
   });
 }
+
+module.exports.PatchProduct = (id, attributes, csrfToken) => {
+  const endPoint = `/admin/updateproduct/${id}`;
+  console.log('Patching product with', attributes);
+  fetch(endPoint, {
+    headers: {
+      'CSRF-Token': csrfToken,
+      'Content-Type': 'application/json'
+    },
+    method: 'PATCH',
+    body: JSON.stringify(attributes)
+  })
+}
