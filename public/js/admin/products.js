@@ -5,15 +5,78 @@ const editButtons = document.querySelectorAll('.product-edit');
 const deleteButtons = document.querySelectorAll('.product-delete');
 const templateEdit = document.querySelector('#product-edit');
 const templateFinished = document.querySelector('#product-finished');
+const addButton = document.querySelector('.add');
 
 let editable = true;
 let sendable = true;
 let imageChanged = false;
+let onCancelDelete = false;
 let attributes = {};
 let holders = {};
 
+addButton.addEventListener('click', (event) => {
+  event.preventDefault();
+
+  if (!editable) return;
+  const productsForm = document.querySelector('.products');
+  const form = createForm();
+  productsForm.insertBefore(form, productsForm.lastChild);
+  editable = false;
+})
+
+const createForm = () => {
+  const form = document.importNode(templateEdit.content, true);
+  const confirmButton = form.querySelector('.product-accept');
+  const cancelButton = form.querySelector('.product-cancel');
+  const id = form.querySelector('input[name="id"]');
+  const name = form.querySelector('input[name="name"]');
+  const price = form.querySelector('input[name="price"]');
+  const description = form.querySelector('textarea[name="description"]');
+  const image = form.querySelector('img[name="img"]');
+  const imagePicker = form.querySelector('input[name="img-picker"]');
+
+  onCancelDelete = true;
+
+  holders = {
+    id,
+    name,
+    price,
+    description,
+    image,
+    form,
+    confirmButton,
+    cancelButton
+  };
+
+  sendable = false;
+  requests.CreateProduct(csrfToken)
+    .then(idVal => {
+      console.log(idVal, id);
+      id.value = idVal;
+      sendable = true;
+      confirmButton.addEventListener('click', confirmHandle);
+      cancelButton.addEventListener('click', cancelHandle);
+      imagePicker.addEventListener('change', (sender) => {
+        console.log(sender);
+        sendable = false;
+        imageChanged = true;
+
+        requests
+          .SendImage(sender.target, csrfToken)
+          .then((result) => {
+            image.src = result.path;
+            console.log(result.path);
+            sendable = true;
+          });
+      });
+    });
+
+  return form;
+}
+
 const confirmHandle = (sender) => {
   if (!sendable) { return; }
+  onCancelDelete = false;
   const superParent = sender.target.closest('.product');
   const container = superParent.parentElement;
 
@@ -65,7 +128,15 @@ const cancelHandle = (sender) => {
   const superParent = sender.target.closest('.product');
   const container = superParent.parentElement;
   const clone = document.importNode(templateFinished.content, true);
-
+  console.log(superParent);
+  if (onCancelDelete) {
+    const id = superParent.querySelector('input[name="id"]');
+    requests.DeleteProduct(id.value, csrfToken)
+    superParent.remove();
+    editable = true;
+    sendable = true;
+    return;
+  }
   productFill(clone, attributes);
   container.replaceChild(clone, superParent);
   editable = true;
@@ -174,13 +245,13 @@ const ReplaceElement = (element, object) => {
   description.value = object['description']
 
 
-  imagePicker.addEventListener('change', (event) => {
-    console.log(event);
+  imagePicker.addEventListener('change', (sender) => {
+    console.log(sender);
     sendable = false;
     imageChanged = true;
 
     requests
-      .SendImage(event.target, csrfToken)
+      .SendImage(sender.target, csrfToken)
       .then((result) => {
         image.src = result.path;
         console.log(result.path);

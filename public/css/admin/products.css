@@ -51,9 +51,10 @@ h2 {
   font-weight: 100;
 }
 
-.product .product-price {
+.product .product-price-section {
   color: #eeeeee;
   font-size: 1.8rem;
+  display: flex;
 }
 
 .product .dollar {

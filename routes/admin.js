@@ -20,6 +20,7 @@ Router.delete('/deleteproduct', controllers.deleteProduct);
 
 // PICTURES.
 Router.post('/sendpicture', auth.isAuth, controllers.sendPicture);
+Router.post('/createproduct', auth.isAuth, controllers.createProduct);
 Router.delete('/deletepicture', auth.isAuth, controllers.deletePicture);
 
 module.exports = Router;

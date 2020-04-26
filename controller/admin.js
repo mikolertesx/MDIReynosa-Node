@@ -16,6 +16,14 @@ module.exports.getProducts = (req, res, next) => {
     })
 }
 
+module.exports.createProduct = (req, res, next) => {
+  return Product
+    .create({})
+    .then(product => {
+      return res.json({id: product._id.toString()})
+    })
+}
+
 module.exports.deleteProduct = (req, res, next) => {
   const id = req.body.id;
   Product
@@ -25,7 +33,6 @@ module.exports.deleteProduct = (req, res, next) => {
         'message': 'Ok'
       })
     })
-
 }
 
 module.exports.updateProducts = (req, res, next) => {

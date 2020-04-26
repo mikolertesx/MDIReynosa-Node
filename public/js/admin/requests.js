@@ -10,12 +10,12 @@ module.exports.SendImage = (FilePicker, csrfToken) => {
     method: 'POST',
     body: formData
   })
-  .then(response => {
-    return response.json();
-  })
-  .then(json => {
-    return json;
-  });
+    .then(response => {
+      return response.json();
+    })
+    .then(json => {
+      return json;
+    });
 }
 
 module.exports.DeleteProduct = (id, csrfToken) => {
@@ -26,7 +26,7 @@ module.exports.DeleteProduct = (id, csrfToken) => {
       'Content-Type': 'application/json'
     },
     method: 'DELETE',
-    body: JSON.stringify({id: id})
+    body: JSON.stringify({ id: id })
   });
 }
 
@@ -38,9 +38,23 @@ module.exports.DeleteImage = (imagePath, csrfToken) => {
       'Content-Type': 'application/json'
     },
     method: 'DELETE',
-    body: JSON.stringify({path: imagePath})
+    body: JSON.stringify({ path: imagePath })
   });
   console.log(endpoint);
+}
+
+module.exports.CreateProduct = (csrfToken) => {
+  const endPoint = `/admin/createproduct`;
+  return fetch(endPoint, {
+    headers: {
+      'CSRF-Token': csrfToken,
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+  }).then(response => response.json())
+  .then(data => {
+    return data.id;
+  })
 }
 
 module.exports.PatchProduct = (id, attributes, csrfToken) => {
