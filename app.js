@@ -19,6 +19,11 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const mongoose = require('mongoose');
 
+const fs = require('fs');
+const dir = __dirname + '/public/img/static'
+if (!fs.existsSync(dir)) {
+  fs.mkdirSync(dir);
+}
 
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
