@@ -39,8 +39,9 @@ block content
         .product
             .product-header
                 h3.product-name NAME
-                p.product-price OK
-                p.dollar $
+                .product-price-section
+                    p.product-price ALGO
+                    p.dollar mxn
             img.product-image(src="...", alt="")
             .product-info
                 input.product-id(type="hidden" value="Nothing")
@@ -57,7 +58,7 @@ block content
                     h3.product-name #{product.name}
                     .product-price-section
                         p.product-price #{product.price}
-                        p.dollar $
+                        p.dollar mxn
                 img.product-image(src=product.image, alt="")
                 .product-info
                     input.product-id(type="hidden" value=product._id)
