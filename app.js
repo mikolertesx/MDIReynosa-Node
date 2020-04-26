@@ -114,6 +114,8 @@ app.use((err, req, res, next) => {
   });
 })
 
+const port = process.env.PORT || 3000;
+
 // Start the server.
 mongoose.connect(secrets.mongoURI, {
   useNewUrlParser: true,
@@ -121,5 +123,5 @@ mongoose.connect(secrets.mongoURI, {
 })
   .then(() => {
     console.log('Server succesfully loaded database, web-page will start now.');
-    app.listen(3000);
+    app.listen(port);
   })
