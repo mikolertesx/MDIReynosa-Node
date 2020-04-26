@@ -21,6 +21,19 @@ h2 {
   flex-direction: column;
 }
 
+.product .add {
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product .add img{
+  width: 80%;
+  margin: auto;
+}
+
 .product .product-header{
   width: 100%;
   background-color: #236386;

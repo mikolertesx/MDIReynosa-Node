@@ -90,8 +90,10 @@ const deleteHandle = (sender) => {
     return;
   }
   const superParent = sender.target.closest('.product');
+  const id = superParent.querySelector('.product-id').value;
   const container = superParent.parentElement;
   superParent.remove();
+  requests.DeleteProduct(id, csrfToken);
 }
 
 const formPrevent = (sender) => {

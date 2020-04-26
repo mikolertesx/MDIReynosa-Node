@@ -16,6 +16,18 @@ module.exports.getProducts = (req, res, next) => {
     })
 }
 
+module.exports.deleteProduct = (req, res, next) => {
+  const id = req.body.id;
+  Product
+    .findOneAndDelete({_id: id})
+    .then(deleted => {
+      return res.json({
+        'message': 'Ok'
+      })
+    })
+
+}
+
 module.exports.updateProducts = (req, res, next) => {
   const id = req.body.id;
   const name = req.body.name;
