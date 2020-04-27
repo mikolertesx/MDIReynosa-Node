@@ -50,8 +50,14 @@ module.exports.postRegister = (req, res, next) => {
       }
     })
     .then(() => {
-      req.flash('info', 'La cuenta se encuentra en revisión')
-      return res.redirect('/');
+      if (isAdmin === true) {
+        req.flash('info', 'Esta cuenta se ha configurado como administrador.');
+        return res.redirect('/');
+      }
+      else {
+        req.flash('info', 'La cuenta se encuentra en revisión')
+        return res.redirect('/');
+      }
     })
     .catch(error => {
       console.log(error);
