@@ -27,6 +27,10 @@ module.exports.postRegister = (req, res, next) => {
       throw new Error('Las contraseñas no coinciden.');
     })
     .then(() => {
+      if (password.length > 5) return;
+      throw new Error('Las contraseñas deben medir al menos 5 caracteres.');
+    })
+    .then(() => {
       return User.findOne({ name: username })
     })
     .then(doc => {
