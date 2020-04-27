@@ -1,3 +1,6 @@
+// TODO Add a favicon.
+// TODO Add employees implementation.
+// TODO Add more images so that it looks cool.
 const express = require('express');
 const browserify = require('browserify-middleware');
 const bodyParser = require('body-parser');

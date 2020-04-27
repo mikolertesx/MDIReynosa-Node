@@ -10,7 +10,6 @@ Router.use('/', (req, res, next) => {
     ['/products', 'fas fa-dollar-sign', 'Productos']
   ];
   if (req.session.user) {
-    // TODO Find a more performant way to do this.
     User.findById(req.session.user).then(user => {
       req.user = user;
       if (req.user) {
