@@ -69,6 +69,20 @@ header nav ul li img {
     font-weight: 100;
 }
 
+p.message {
+    display: flex;
+    width: 90%;
+    margin: 20px auto;
+    height: 10vh;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background: rgb(197, 21, 21);
+    color: white;
+    border: 3px solid rgb(238, 81, 81);
+    border-radius: 12px;
+}
+
 @media (max-width: 800px) {
     body {
         padding-bottom: 12vh;

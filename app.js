@@ -18,6 +18,7 @@ const adminRoutes = require('./routes/admin');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const mongoose = require('mongoose');
+const flash = require('connect-flash');
 
 const fs = require('fs');
 const dir = __dirname + '/public/img/static'
@@ -60,6 +61,8 @@ app.use(session({
     expires: 1000 * 60 * 24 * 7
   }
 }));
+
+app.use(flash());
 
 // Convert to JS-Browser
 app.use('/js', browserify(path.join(__dirname, 'public', 'js')));

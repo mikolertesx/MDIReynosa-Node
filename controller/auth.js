@@ -2,28 +2,36 @@ const User = require('../model/User');
 const bcrypt = require('bcrypt');
 
 module.exports.getRegister = (req, res, next) => {
+  const message = req.flash('error')[0];
+  console.log(message);
   res.render('auth/register', {
-    csrfToken: req.csrfToken()
+    csrfToken: req.csrfToken(),
+    message: message
   });
 }
 
 module.exports.postRegister = (req, res, next) => {
   const username = req.body.username;
-  const password = req.body.password.trim();
+  const password = req.body.password;
+  const confirmPassword = req.body.confirmPassword;
   let isAdmin = false;
 
   User
-    .count()
+    .countDocuments()
     .then(qty => {
       isAdmin = qty === 0 ? true : false;
       return;
     })
-    .then(() =>{
-      return User.findOne({ name: username }) 
-    }) 
+    .then(() => {
+      if (password === confirmPassword) return;
+      throw new Error('Las contraseñas no coinciden.');
+    })
+    .then(() => {
+      return User.findOne({ name: username })
+    })
     .then(doc => {
       if (doc) {
-        throw new Error('This shouldnt happen');
+        throw new Error('El usuario ya existe.');
       } else {
         return bcrypt
           .hash(password, 12)
@@ -32,7 +40,7 @@ module.exports.postRegister = (req, res, next) => {
               name: username,
               password: hashedPassword,
               products: [],
-              role: isAdmin ? "Administrador": "Empleado"
+              role: isAdmin ? "Administrador" : "Pendiente"
             });
           });
       }
@@ -41,12 +49,17 @@ module.exports.postRegister = (req, res, next) => {
       return res.redirect('/');
     })
     .catch(error => {
+      console.log(error);
+      req.flash('error', error.message);
       return res.redirect('/register');
     });
 }
 module.exports.getLogin = (req, res, next) => {
+  const message = req.flash('error')[0];
+  console.log(message);
   res.render('auth/login', {
-    csrfToken: req.csrfToken()
+    csrfToken: req.csrfToken(),
+    message: message
   });
 }
 
@@ -56,11 +69,12 @@ module.exports.postLogin = (req, res, next) => {
   let userFound;
   User.findOne({ name: username })
     .then(user => {
-      if (user) {
+      if (user && user.role !== 'Pendiente') {
         return user;
-      }
-      else {
+      } else if (!user) {
         throw new Error('Usuario no encontrado.');
+      } else if (user.role === 'Pendiente') {
+        throw new Error('El usuario todavía no ha sido aprobado.');
       }
     })
     .then(user => {
@@ -77,7 +91,7 @@ module.exports.postLogin = (req, res, next) => {
       }
     })
     .catch((error) => {
-      console.log(error);
+      req.flash('error', error.message);
       res.redirect('/login')
     })
 

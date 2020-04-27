@@ -22,6 +22,8 @@ html(lang="en")
                         li: a(href=path[0], class=(curPath === path[0]? "active": "")): i(class=path[1])
                             p.only-pc.small-text #{path[2]}
         main
+            if message
+                p.message #{message}
             block content
     footer
     //- Vacia por ahora.
