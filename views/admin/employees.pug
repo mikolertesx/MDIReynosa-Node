@@ -1,0 +1,44 @@
+extends ../base.pug
+
+block nav
+  - var curPath = '/admin'
+
+block css
+  link(rel="stylesheet", href="/css/admin/employees.css")
+
+block js
+  script(src="/js/admin/employees.js")
+
+block content
+  input(type="hidden", name="_csrfToken", value=csrfToken)
+  .opciones
+    .usuarios-registrados
+      h2 Usuarios registrados
+      ul
+        for usuario in usuariosRegistrados
+          div.usuario-controles
+            .usuario-info
+              p.usuario-nombre #{usuario.name}
+              input(type="hidden", name="_id", value=usuario._id)
+              div.usuario-posicion
+                if (usuarioActual._id.toString() === usuario._id.toString())
+                  p.usuario-actual Usuario actual.
+                p #{usuario.role}
+            if usuarioActual.role === 'Administrador'
+              if usuario.role !== 'Administrador' && (usuarioActual._id.toString() !== usuario._id.toString())
+                div.usuario-operaciones
+                  button.usuario-rechazar Eliminar
+    .usuarios-no-registrados
+      h2 Usuarios no registrados
+      ul
+        if usuariosNoRegistrados.length > 0
+          for usuario in usuariosNoRegistrados
+            div.usuario-controles
+              .usuario-info
+                p.usuario-nombre #{usuario.name}
+                input(type="hidden", name="_id", value=usuario._id)
+              div.usuario-operaciones
+                button.usuario-rechazar Rechazar
+                button.usuario-aceptar Aceptar
+        else
+          h3 No hay solicitudes de usuarios.

@@ -1,3 +1,27 @@
+module.exports.AcceptUser = (id, csrfToken) => {
+  const endPoint = '/admin/acceptemployee';
+  return fetch(endPoint, {
+    headers: {
+      'CSRF-Token': csrfToken,
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify({id: id})
+  });
+}
+
+module.exports.RejectUser = (id, csrfToken) => {
+  const endPoint = '/admin/rejectemployee';
+  return fetch(endPoint, {
+    headers: {
+      'CSRF-Token': csrfToken,
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify({id:id})
+  });
+}
+
 module.exports.SendImage = (FilePicker, csrfToken) => {
   const endPoint = "/admin/sendpicture";
   const formData = new FormData();

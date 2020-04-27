@@ -1,5 +1,5 @@
 module.exports.isAuth = (req, res, next) => {
-  if (req.user) {
+  if (req.user && req.user.role !== 'Pendiente') {
     console.log('Acceso garantizado.');
     next();
   } else {
@@ -9,9 +9,10 @@ module.exports.isAuth = (req, res, next) => {
 }
 
 module.exports.isNotAuth = (req, res, next) => {
-  if (req.user) {
-    res.redirect('/');
-  } else {
-    next();
+  if (req.user && req.user.role === 'Pendiente') {
+    return res.redirect('/');
+  } else if (req.user) {
+    return res.redirect('/')
   }
+  next();
 }

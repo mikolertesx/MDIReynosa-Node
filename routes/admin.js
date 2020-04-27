@@ -13,6 +13,9 @@ function replaceAll(str, find, replace) {
 
 Router.get('/', auth.isAuth, controllers.getIndex);
 Router.get('/products', auth.isAuth, controllers.getProducts);
+Router.get('/employees', auth.isAuth, controllers.getEmployees);
+Router.post('/acceptemployee', auth.isAuth, controllers.acceptEmployee);
+Router.post('/rejectemployee', auth.isAuth, controllers.rejectEmployee);
 
 // Update products.
 Router.patch('/updateproduct/:id', controllers.updateProducts);

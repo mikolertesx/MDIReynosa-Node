@@ -1,4 +1,5 @@
 const Product = require('../model/Product');
+const User = require('../model/User');
 const fileDelete = require('../util/fileHelper').deleteFile;
 
 module.exports.getIndex = (req, res, next) => {
@@ -16,18 +17,74 @@ module.exports.getProducts = (req, res, next) => {
     })
 }
 
+module.exports.getEmployees = (req, res, next) => {
+  let registeredUsers;
+  let notRegisteredUsers;
+
+  User.find({ role: 'Pendiente' })
+    .then(nUsers => {
+      notRegisteredUsers = nUsers;
+    })
+    .then(() => User.where('role').ne('Pendiente'))
+    .then(rUsers => {
+      registeredUsers = rUsers;
+    }).then(() => {
+      return res.render('admin/employees', {
+        usuariosRegistrados: registeredUsers,
+        usuariosNoRegistrados: notRegisteredUsers,
+        usuarioActual: req.user,
+        csrfToken: req.csrfToken()
+      });
+    })
+}
+
+// JSON req.
+module.exports.acceptEmployee = (req, res, next) => {
+  const id = req.body.id;
+  console.log('Userid', id);
+  console.log('body', req.body);
+  User
+    .findOne({ _id: id })
+    .then(user => {
+      if (user) {
+        return user;
+      }
+      else {
+        throw new Error('No usuario');
+      }
+    })
+    .then(confirmedUser => {
+      confirmedUser.role = 'Empleado';
+      return confirmedUser.save();
+    })
+    .then(result => {
+      res.json({message: result ? "Worked":"Error"});
+    })
+}
+
+module.exports.rejectEmployee = (req, res, next) => {
+  const id = req.body.id;
+  User
+    .findOneAndDelete({ _id: id})
+    .then(result => {
+      return res.json({
+        message: result ? "Ok":"Error"
+      })
+    })
+}
+
 module.exports.createProduct = (req, res, next) => {
   return Product
     .create({})
     .then(product => {
-      return res.json({id: product._id.toString()})
+      return res.json({ id: product._id.toString() })
     })
 }
 
 module.exports.deleteProduct = (req, res, next) => {
   const id = req.body.id;
   Product
-    .findOneAndDelete({_id: id})
+    .findOneAndDelete({ _id: id })
     .then(deleted => {
       return res.json({
         'message': 'Ok'
