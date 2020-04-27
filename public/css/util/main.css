@@ -83,6 +83,20 @@ p.message {
     border-radius: 12px;
 }
 
+p.info {
+    display: flex;
+    width: 90%;
+    margin: 20px auto;
+    height: 10vh;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background: rgb(94, 68, 240);
+    color: white;
+    border: 3px solid rgb(55, 45, 199);
+    border-radius: 12px;
+}
+
 @media (max-width: 800px) {
     body {
         padding-bottom: 12vh;

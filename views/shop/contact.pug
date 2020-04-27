@@ -26,7 +26,8 @@ block content
                 p Diseño
                 p Industrial
 
-        form(action="/", method="POST")
+        form(action="/contact", method="POST")
+            input(type="hidden", name="_csrf", value=csrfToken)
             .form-header
                 h2.form-title Enviar correo
             .control

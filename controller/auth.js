@@ -46,6 +46,7 @@ module.exports.postRegister = (req, res, next) => {
       }
     })
     .then(() => {
+      req.flash('info', 'La cuenta se encuentra en revisión')
       return res.redirect('/');
     })
     .catch(error => {
