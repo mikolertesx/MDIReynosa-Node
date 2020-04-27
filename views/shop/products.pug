@@ -19,7 +19,10 @@ block content
                             span.dollar $
                     img.product-image(src=product.image, alt="")
                     .product-info
-                        p.product-description #{product.description}            
-                        a.product-buy(href=`/product/${product.id}`) Comprar
+                        p.product-description #{product.description}
+                        if product.url !== ''            
+                            a.product-buy(href=product.url) Comprar
+                        else
+                            a.product-contact(href='/contact') Contactar
     else
         h2 No hay productos agregados de momento.

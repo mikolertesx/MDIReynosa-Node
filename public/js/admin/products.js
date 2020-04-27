@@ -28,6 +28,7 @@ const createForm = () => {
   const form = document.importNode(templateEdit.content, true);
   const confirmButton = form.querySelector('.product-accept');
   const cancelButton = form.querySelector('.product-cancel');
+  const url = form.querySelector('input[name="url"]');
   const id = form.querySelector('input[name="id"]');
   const name = form.querySelector('input[name="name"]');
   const price = form.querySelector('input[name="price"]');
@@ -39,6 +40,7 @@ const createForm = () => {
 
   holders = {
     id,
+    url,
     name,
     price,
     description,
@@ -85,7 +87,8 @@ const confirmHandle = (sender) => {
     price: holders.price.value,
     image: holders.image.getAttribute("src"),
     description: holders.description.value,
-    id: holders.id.value
+    id: holders.id.value,
+    url: holders.url.value
   };
 
   console.log(attributes.price);
@@ -179,6 +182,7 @@ const productFill = (element, data) => {
   const image = element.querySelector('.product-image');
   const description = element.querySelector('.product-description');
   const id = element.querySelector('.product-id');
+  const url = element.querySelector('.product-url');
   const editButton = element.querySelector('.product-edit');
   const deletebutton = element.querySelector('.product-delete');
 
@@ -189,6 +193,7 @@ const productFill = (element, data) => {
   price.innerHTML = attributes['price'];
   image.src = attributes['image'];
   description.innerText = attributes['description'];
+  url.value = attributes['url'];
   id.value = attributes['id'];
 }
 
@@ -198,6 +203,7 @@ const getAttributes = (element) => {
   const priceElement = element.querySelector('.product-price').innerText;
   const imageElement = element.querySelector('.product-image').src;
   const elementId = element.querySelector('.product-id').value;
+  const productUrl = element.querySelector('.product-url').value;
   const description = element.querySelector('.product-description').innerText;
 
   const newAttributes = {
@@ -205,6 +211,7 @@ const getAttributes = (element) => {
     price: priceElement,
     image: imageElement,
     description: description,
+    url: productUrl,
     id: elementId
   };
 
@@ -218,6 +225,7 @@ const ReplaceElement = (element, object) => {
   const clone = document.importNode(templateEdit.content, true);
   console.log(clone);
   const id = clone.querySelector('input[name="id"]');
+  const url = clone.querySelector('input[name="url"]');
   const name = clone.querySelector('input[name="name"]');
   const price = clone.querySelector('input[name="price"]');
   const description = clone.querySelector('textarea[name="description"]');
@@ -229,6 +237,7 @@ const ReplaceElement = (element, object) => {
 
   holders = {
     id,
+    url,
     name,
     price,
     description,
@@ -239,6 +248,7 @@ const ReplaceElement = (element, object) => {
   };
 
   id.value = object['id'];
+  url.value = object['url'];
   name.value = object['name'];
   price.value = object['price'];
   image.src = object['image'];

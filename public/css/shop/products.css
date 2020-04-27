@@ -78,6 +78,24 @@ h2 {
   font-size: 1.5rem;
 }
 
+.product .product-contact {
+  background: #54accf;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  display: block;
+  color: white;
+  padding: 64px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+.product .product-contact:hover,
+.product .product-contact:active {
+  color: #54accf;
+  background: white;
+}
+
 .product .product-buy:hover,
 .product .product-buy:active {
   color: #2aa3e4;

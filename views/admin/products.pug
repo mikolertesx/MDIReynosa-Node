@@ -27,7 +27,10 @@ block content
                 //- Fill by code.
                 img.product-image(src="...", alt="..." name="img")
                 input(type="file" name="img-picker")
-            .product-info    
+            .product-info
+                .control
+                    label(for="url") Url de compra
+                    input(type="text" name="url") 
                 .control
                     label(for="description") Descripcion
                     textarea(name="description")
@@ -44,6 +47,7 @@ block content
                     p.dollar mxn
             img.product-image(src="...", alt="")
             .product-info
+                input.product-url(type="hidden" value="NOTHING")
                 input.product-id(type="hidden" value="Nothing")
                 p.product-description DESCRIPTION
             .product-actions
@@ -61,6 +65,7 @@ block content
                         p.dollar mxn
                 img.product-image(src=product.image, alt="")
                 .product-info
+                    input.product-url(type="hidden" value=product.url)
                     input.product-id(type="hidden" value=product._id)
                     p.product-description #{product.description}
                     .product-actions

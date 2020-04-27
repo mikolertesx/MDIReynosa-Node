@@ -97,6 +97,7 @@ module.exports.updateProducts = (req, res, next) => {
   const name = req.body.name;
   const price = req.body.price;
   const image = req.body.image;
+  const url = req.body.url;
   const description = req.body.description;
   console.log('image', image);
   Product.findOne({
@@ -108,6 +109,7 @@ module.exports.updateProducts = (req, res, next) => {
       fileDelete(product.image);
       product.image = image;
     }
+    product.url = url;
     product.description = description;
     product.name = name;
 
