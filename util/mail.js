@@ -4,8 +4,8 @@ const user = "mdireynosa@gmail.com";
 const pass = "ManDisInd";
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
+  host: "imap.gmail.com",
+  port: 993,
   secure: true,
   auth: {
     user: user,
