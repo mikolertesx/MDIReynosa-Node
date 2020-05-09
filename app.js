@@ -8,6 +8,7 @@ const multer = require('multer');
 const path = require('path');
 const app = express();
 
+const forceHTTPS = require('./middleware/forceHTTPS');
 const navigation = require('./middleware/navigation');
 const csrfProtection = require('./middleware/csrf');
 const debug = require('./middleware/debug');
@@ -69,6 +70,8 @@ app.use(flash());
 
 // Convert to JS-Browser
 app.use('/js', browserify(path.join(__dirname, 'public', 'js')));
+
+app.use(forceHTTPS);
 
 // Create a static folder for using in the views.
 app.use(express.static('public'))
